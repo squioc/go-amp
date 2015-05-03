@@ -8,7 +8,7 @@ import (
 func Encode(messages []Message) ([]byte, error) {
     encoder := newEncoder()
 
-    encoder.WriteHeader(1, len(messages))
+    encoder.WriteHeader(VERSION, len(messages))
     encoder.WriteBody(messages)
 
     return encoder.Bytes(), nil

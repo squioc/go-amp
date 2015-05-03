@@ -18,7 +18,7 @@ func Decode(frame []byte) ([]Message, error) {
         return nil, error
     }
 
-    if version < 1 {
+    if version < VERSION {
         return nil, errors.New("Incompatible version")
     }
 
