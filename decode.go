@@ -7,9 +7,14 @@ import (
 	"math"
 )
 
+var (
+	ErrEmptyInput     = errors.New("Empty frame")
+	ErrInvalidVersion = errors.New("Incompatible version")
+)
+
 func Decode(frame []byte) ([]Message, error) {
 	if len(frame) <= 0 {
-		return nil, errors.New("Empty frame")
+		return nil, ErrEmptyInput
 	}
 
 	decoder := newDecoder(bytes.NewBuffer(frame))
@@ -19,7 +24,7 @@ func Decode(frame []byte) ([]Message, error) {
 	}
 
 	if version > VERSION {
-		return nil, errors.New("Incompatible version")
+		return nil, ErrInvalidVersion
 	}
 
 	return decoder.ReadBody(argc)
